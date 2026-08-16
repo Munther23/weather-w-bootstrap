@@ -21,3 +21,17 @@
     padding-top: 2.5rem;
     text-align: center;
 }
+
+.weather-card {
+    border: 1px solid #e0e0e0;
+    margin-top: 2.5rem;
+
+}
+
+#weather-history {
+    list-style: none;
+}
+
+span {
+    margin-right: 2.5rem;
+}

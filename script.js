@@ -17,7 +17,9 @@ function mapApiResponse(data) {
 $("#search-field").on("submit", function(e) {
     e.preventDefault();
     const search = $("#city-input").val();
+    $("#search-error").addClass("d-none");
     fetchWeatherByCity(search)
+
 });
 
 const options = {
@@ -51,6 +53,7 @@ function fetchWeatherByCoords(lat, lon) {
     $.getJSON(url)
         .done(function (data) {
             displayWeather(mapApiResponse(data));
+            addHistory(mapApiResponse(data))
         });
 }
 
@@ -75,5 +78,44 @@ function fetchWeatherByCity(cityName) {
         .done(function (data) {
             const weather = mapApiResponse(data);
             displayWeather(weather)
+            addHistory(weather)
+        })
+        .fail(function (e) {
+            if (e.status === 500 || e.status=== 404) {
+                $("#search-error")
+                .removeClass("d-none")
+            }
         });
 }
+
+function addHistory(weather) {
+    let history = JSON.parse(localStorage.getItem("history")) || [];
+    history.unshift(weather);
+    history = history.slice(0, 5);
+    localStorage.setItem("history", JSON.stringify(history));
+
+    displayHistory();
+}
+
+function displayHistory(){
+    const history = JSON.parse(localStorage.getItem("history")) || [];
+
+    $("#weather-history").empty();
+
+    history.forEach(function (weather) {
+        const li = `
+        <div class="weather-card">
+            <img src="${weather.iconUrl}" alt="${weather.description}">
+            <span>${weather.city}</span>
+            <span>${weather.temp.toFixed(2)} °C</span>
+            <span>${weather.wind.toFixed(2)} m/s</span>
+        </div>
+    `;
+        $("#weather-history").append(li);
+    });
+}
+
+$(document).ready(function () {
+    displayHistory();
+    $("#city-input").popover();
+});

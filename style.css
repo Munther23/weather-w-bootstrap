@@ -4,6 +4,11 @@
     align-items: center;
     gap: 0.5rem;
 }
+@media (max-width: 500px) {
+    #weather-search{
+        flex-direction: column;
+    }
+}
 
 #container {
     max-width: 700px;
@@ -25,13 +30,30 @@
 .weather-card {
     border: 1px solid #e0e0e0;
     margin-top: 2.5rem;
-
 }
-
+@media (max-width: 500px) {
+    .weather-card {
+        padding: 10px;
+        font-size: 0.8rem;
+        gap: 8px;
+    }
+    .weather-card img {
+        width: 40px;
+    }
+}
 #weather-history {
     list-style: none;
 }
 
 span {
     margin-right: 2.5rem;
+}
+@media (max-width: 500px) {
+    span {
+        margin-right: 0.5rem;
+    }
+}
+
+#search-error {
+    margin:2.5rem;
 }

@@ -1,0 +1,23 @@
+#weather-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+#top-section {
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+#bottom-section {
+    padding-top: 2.5rem;
+    text-align: center;
+}
